@@ -1,15 +1,26 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import '@/styles/globals.css'
-import Navigation from '@/components/Navigation'
+import './globals.css'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { ToastProvider } from '@/contexts/ToastContext'
+import ThemeToggle from '@/components/ui/ThemeToggle'
+import ThemeTransition from '@/components/ui/ThemeTransition'
+import AnimatedBackground from '@/components/ui/AnimatedBackground'
+import Navigation from '@/components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'SkillMapper - Visualize Your Learning Journey',
-  description: 'Create and manage your skill development roadmap with interactive visualizations',
+  title: 'Skill Mapper',
+  description: 'Track and visualize your learning journey',
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 }
 
 export default function RootLayout({
@@ -18,16 +29,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={inter.className}>
-        <AuthProvider>
-          <ToastProvider>
-            <Navigation />
-            <main className="min-h-screen bg-background">
+        <ThemeProvider>
+          <AuthProvider>
+            <ToastProvider>
+              <AnimatedBackground />
+              <Navigation />
               {children}
-            </main>
-          </ToastProvider>
-        </AuthProvider>
+              <ThemeToggle />
+              <ThemeTransition />
+            </ToastProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

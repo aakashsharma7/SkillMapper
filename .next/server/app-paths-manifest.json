@@ -1,0 +1,8 @@
+{
+  "/page": "app/page.js",
+  "/api/resources/route": "app/api/resources/route.js",
+  "/api/skills/route": "app/api/skills/route.js",
+  "/profile/page": "app/profile/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/skill-map/page": "app/skill-map/page.js"
+}

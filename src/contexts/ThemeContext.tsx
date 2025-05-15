@@ -13,23 +13,43 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     // Check for saved theme preference or system preference
     const savedTheme = localStorage.getItem('theme') as Theme
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    setTheme(savedTheme || systemTheme)
+    const initialTheme = savedTheme || systemTheme
+    setTheme(initialTheme)
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+
     // Update document class and save preference
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(theme)
+    const root = document.documentElement
+    root.classList.remove('light', 'dark')
+    root.classList.add(theme)
     localStorage.setItem('theme', theme)
-  }, [theme])
+
+    // Update meta theme-color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute(
+        'content',
+        theme === 'dark' ? '#000000' : '#ffffff'
+      )
+    }
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
+  }
+
+  // Prevent flash of wrong theme
+  if (!mounted) {
+    return null
   }
 
   return (
