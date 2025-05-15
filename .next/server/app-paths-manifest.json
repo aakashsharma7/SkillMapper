@@ -1,7 +1,11 @@
 {
-  "/page": "app/page.js",
+  "/_not-found": "app/_not-found.js",
   "/api/resources/route": "app/api/resources/route.js",
+  "/api/suggestions/route": "app/api/suggestions/route.js",
+  "/page": "app/page.js",
   "/api/skills/route": "app/api/skills/route.js",
+  "/auth/page": "app/auth/page.js",
+  "/auth/callback/route": "app/auth/callback/route.js",
   "/profile/page": "app/profile/page.js",
   "/resources/page": "app/resources/page.js",
   "/skill-map/page": "app/skill-map/page.js"
