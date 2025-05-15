@@ -24,6 +24,8 @@ interface NewResource {
   status: ResourceStatus
   priority: ResourcePriority
   tags: string[]
+  estimated_time_minutes?: number
+  progress_percentage?: number
 }
 
 export default function AnimatedResourcesContent({
@@ -41,7 +43,9 @@ export default function AnimatedResourcesContent({
     completed: false,
     status: 'not_started',
     priority: 'medium',
-    tags: []
+    tags: [],
+    estimated_time_minutes: undefined,
+    progress_percentage: undefined
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -56,7 +60,9 @@ export default function AnimatedResourcesContent({
       completed: false,
       status: 'not_started',
       priority: 'medium',
-      tags: []
+      tags: [],
+      estimated_time_minutes: undefined,
+      progress_percentage: undefined
     })
   }
 
