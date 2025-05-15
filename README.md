@@ -72,4 +72,60 @@ src/
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Deployment
+
+### Vercel Deployment
+
+1. Push your code to a GitHub repository
+2. Go to [Vercel](https://vercel.com) and create a new project
+3. Import your GitHub repository
+4. Add the following environment variables in Vercel:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `OPENAI_API_KEY`
+   - `NEXT_PUBLIC_APP_URL` (set to your production URL)
+5. Deploy!
+
+### Manual Deployment
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. Start the production server:
+   ```bash
+   npm start
+   ```
+
+### Environment Variables
+
+Make sure to set up the following environment variables in your production environment:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+OPENAI_API_KEY=your_openai_api_key
+NEXT_PUBLIC_APP_URL=your_production_url
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Build Errors**
+   - Make sure all dependencies are installed: `npm install`
+   - Clear Next.js cache: `rm -rf .next`
+   - Rebuild: `npm run build`
+
+2. **Environment Variables**
+   - Verify all required environment variables are set
+   - Check for typos in variable names
+   - Ensure values are properly formatted
+
+3. **Database Connection**
+   - Verify Supabase URL and anon key
+   - Check database permissions
+   - Ensure tables are properly set up 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { Resource, ResourceType } from '@/types/resource'
+import type { Resource, ResourceType, ResourceStatus, ResourcePriority } from '@/types/resource'
 import ErrorComponent from '@/components/ui/Error'
 
 const resourceTypes: ResourceType[] = ['article', 'video', 'course', 'project', 'other']
@@ -21,6 +21,9 @@ interface NewResource {
   type: ResourceType
   description: string
   completed: boolean
+  status: ResourceStatus
+  priority: ResourcePriority
+  tags: string[]
 }
 
 export default function AnimatedResourcesContent({
@@ -36,6 +39,9 @@ export default function AnimatedResourcesContent({
     type: 'article',
     description: '',
     completed: false,
+    status: 'not_started',
+    priority: 'medium',
+    tags: []
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -48,6 +54,9 @@ export default function AnimatedResourcesContent({
       type: 'article',
       description: '',
       completed: false,
+      status: 'not_started',
+      priority: 'medium',
+      tags: []
     })
   }
 
